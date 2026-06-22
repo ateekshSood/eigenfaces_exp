@@ -102,4 +102,8 @@ plt.imshow(final_reconstructed_face.reshape(64 , 64 , -1) , cmap='binary')
 plt.axis('off')
 plt.show()
 
+# %%
+plt.imshow(x_train[0].reshape(64 , 64 , -1) , cmap="binary")
+plt.axis('off')
+plt.show()
 
