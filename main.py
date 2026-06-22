@@ -20,4 +20,46 @@ plt.axis("off")
 plt.show()
 
 # %%
-    
+
+#getting the mean of the faces 
+
+x_train_mean = np.mean(x_train , axis=0)
+
+x_train_centered = x_train - x_train_mean
+
+
+x_train_mean.shape
+
+
+plt.imshow(x_train_mean.reshape(np.sqrt(x_train_mean.shape[0]).astype(int) , np.sqrt(x_train_mean.shape[0]).astype(int) , -1) , cmap='binary')
+plt.axis('off')
+plt.show()
+# %%
+fig , ax = plt.subplots(1 , 2 )
+
+ax[0].imshow(x_train[ 0 , :].reshape(np.sqrt(x_train.shape[1]).astype(int) ,np.sqrt(x_train.shape[1]).astype(int) , -1) , cmap='binary')
+ax[0].axis('off')
+ax[0].set_title("Normal")
+
+ax[1].imshow([ 0 , :].reshape(np.sqrt(x_train_centered.shape[1]).astype(int) ,np.sqrt(x_train_centered.shape[1]).astype(int) , -1) , cmap='binary')
+ax[1].axis('off')
+ax[1].set_title("Centered")
+
+plt.show()
+
+# %%
+
+covariance_matrix = 1/(x_train_centered.shape[0]) * (x_train_centered.T @ x_train_centered)
+eigenvalues , eigenvectors = np.linalg.eigh(covariance_matrix)
+# %%
+
+sorted_eigenvalues_indexes = np.argsort(eigenvalues)[::-1]
+sorted_eigenvalues = eigenvalues[sorted_eigenvalues_indexes]
+sorted_eigenvectors = eigenvectors[: , sorted_eigenvalues_indexes]
+
+# %%
+
+print(eigenvectors.shape)
+
+
+eigenvalues.shape
